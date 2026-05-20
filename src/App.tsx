@@ -1217,7 +1217,7 @@ function App() {
 
   return (
     <Router>
-      <CustomCursor />
+      {/* <CustomCursor /> */}
       <ScrollToTop />
       <HashLinkObserver />
       <Navbar isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />

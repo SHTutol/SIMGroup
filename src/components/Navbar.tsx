@@ -24,21 +24,29 @@ const Navbar: React.FC<NavbarProps> = ({ isMenuOpen, setIsMenuOpen }) => {
   }, []);
 
   return (
-    <nav className="fixed top-6 inset-x-6 z-[100] flex justify-center pointer-events-none">
-      <div className="bg-white/70 backdrop-blur-3xl px-8 py-4 rounded-full border border-white/50 shadow-[0_20px_50px_-20px_rgba(0,0,0,0.1)] flex items-center gap-12 pointer-events-auto">
+    <nav className="fixed top-4 inset-x-4 md:inset-x-6 z-[100] flex justify-center pointer-events-none">
+      <div className="bg-white/70 backdrop-blur-3xl px-5 py-2.5 rounded-full border border-white/50 shadow-[0_20px_50px_-20px_rgba(0,0,0,0.1)] flex items-center gap-4 xl:gap-8 pointer-events-auto">
         {/* Branding */}
-        <RouterLink to="/" className="flex items-center gap-4 group">
-          <div className="relative p-1 bg-white rounded-xl shadow-sm border border-slate-100/50">
-            <div className="absolute -inset-2 bg-primary-purple/10 rounded-full blur-lg opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+        <RouterLink 
+          to="/" 
+          onClick={() => {
+            if (window.location.pathname === "/") {
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+          }}
+          className="flex items-center gap-2 xl:gap-3 group"
+        >
+          <div className="relative p-1 bg-white rounded-lg shadow-sm border border-slate-100/50">
+            <div className="absolute -inset-1.5 bg-primary-purple/10 rounded-full blur-lg opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
             <img 
               src={SIM_LOGO} 
-              className="relative h-10 w-auto object-contain group-hover:scale-110 transition-transform duration-500" 
+              className="relative h-7 md:h-8 w-auto object-contain group-hover:scale-110 transition-transform duration-500" 
               alt="SIM Group"
             />
           </div>
           <div className="flex flex-col">
-            <span className="text-xl md:text-2xl font-display font-black text-slate-900 leading-none uppercase tracking-tighter group-hover:text-primary-purple transition-colors">SIM GROUP</span>
-            <span className="text-[9px] font-black text-primary-purple tracking-[0.3em] uppercase mt-1 whitespace-nowrap">Way Forward to Sustainability</span>
+            <span className="text-sm md:text-base font-display font-black text-slate-900 leading-none uppercase tracking-tighter group-hover:text-primary-purple transition-colors">SIM GROUP</span>
+            <span className="text-[7.5px] md:text-[8px] font-black text-primary-purple tracking-[0.2em] uppercase mt-0.5 whitespace-nowrap">Way Forward to Sustainability</span>
           </div>
         </RouterLink>
 
@@ -70,7 +78,7 @@ const Navbar: React.FC<NavbarProps> = ({ isMenuOpen, setIsMenuOpen }) => {
               { name: "SIM FABRICS LTD.(Denim Unit)", slug: "/concerns/azlan-denim"},
               { name: "Authentic Color Tex", slug: "/concerns/authentic-color"},
               { name: "SIM Towel Ind.", slug: "/concerns/sim-towel"},
-              { name: "SIM FABRICS LTD. (Chemical Process Unit)"},
+              { name: "SIM FABRICS LTD. (Chemical Process Unit)", slug: "/concerns/ef-chemicals"},
               { name: "Suntech Energy", slug: "/concerns/suntech-energy"},
               { name: "Azlan Agro Food", slug: "/concerns/azlan-agro"},
               ]
@@ -98,7 +106,7 @@ const Navbar: React.FC<NavbarProps> = ({ isMenuOpen, setIsMenuOpen }) => {
           ].map((item) => (
             <div 
               key={item.name} 
-              className="relative py-2"
+              className="relative py-1"
               onClick={(e) => {
                 if (item.dropdown) {
                   e.stopPropagation();
@@ -117,9 +125,22 @@ const Navbar: React.FC<NavbarProps> = ({ isMenuOpen, setIsMenuOpen }) => {
                   if (item.dropdown) {
                     e.preventDefault();
                     setOpenDropdown(openDropdown === item.name ? null : item.name);
+                  } else {
+                    if (item.slug === "/" && window.location.pathname === "/") {
+                      window.scrollTo({ top: 0, behavior: 'smooth' });
+                    } else if (item.slug.startsWith("/#") && window.location.pathname === "/") {
+                      const id = item.slug.replace('/#', '');
+                      const element = document.getElementById(id);
+                      if (element) {
+                        e.preventDefault();
+                        element.scrollIntoView({ behavior: 'smooth' });
+                        window.history.pushState(null, '', item.slug);
+                      }
+                    }
+                    setOpenDropdown(null);
                   }
                 }}
-                className={`px-5 py-2.5 rounded-full text-[11px] font-black uppercase tracking-widest transition-all duration-300 flex items-center gap-1.5 ${
+                className={`px-3 py-2 rounded-full text-[10px] font-black uppercase tracking-wider transition-all duration-300 flex items-center gap-1 ${
                   openDropdown === item.name
                     ? "text-primary-purple bg-primary-purple/5"
                     : "text-slate-500 hover:text-primary-purple hover:bg-primary-purple/5"
@@ -142,21 +163,21 @@ const Navbar: React.FC<NavbarProps> = ({ isMenuOpen, setIsMenuOpen }) => {
                       animate={{ opacity: 1, y: 0, scale: 1 }}
                       exit={{ opacity: 0, y: 10, scale: 0.95 }}
                       transition={{ duration: 0.2 }}
-                      className="absolute top-full left-1/2 -translate-x-1/2 pt-4 z-[110]"
+                      className="absolute top-full left-1/2 -translate-x-1/2 pt-2 z-[110]"
                     >
-                      <div className="bg-white/95 backdrop-blur-xl rounded-[2rem] shadow-2xl border border-slate-100 p-4 min-w-[220px]">
-                        <div className="space-y-1">
+                      <div className="bg-white/95 backdrop-blur-xl rounded-[1.5rem] shadow-2xl border border-slate-100 p-3 min-w-[200px]">
+                        <div className="space-y-0.5">
                           {item.dropdown.map((subItem, idx) => (
                             <motion.div
                               key={subItem.slug}
                               initial={{ opacity: 0, x: -10 }}
                               animate={{ opacity: 1, x: 0 }}
-                              transition={{ delay: idx * 0.03 }}
+                              transition={{ delay: idx * 0.02 }}
                             >
                               <RouterLink 
                                 to={subItem.slug}
                                 onClick={() => setOpenDropdown(null)}
-                                className="block px-6 py-3 text-[11px] font-bold uppercase tracking-widest text-slate-500 hover:bg-primary-purple/5 hover:text-primary-purple rounded-2xl transition-all"
+                                className="block px-4 py-2 text-[10px] font-bold uppercase tracking-wider text-slate-500 hover:bg-primary-purple/5 hover:text-primary-purple rounded-xl transition-all"
                               >
                                 {subItem.name}
                               </RouterLink>
@@ -173,21 +194,31 @@ const Navbar: React.FC<NavbarProps> = ({ isMenuOpen, setIsMenuOpen }) => {
         </div>
 
         {/* CTA */}
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-2 md:gap-3">
           <motion.a 
             href="/#contact"
+            onClick={(e) => {
+              if (window.location.pathname === "/") {
+                const element = document.getElementById("contact");
+                if (element) {
+                  e.preventDefault();
+                  element.scrollIntoView({ behavior: 'smooth' });
+                  window.history.pushState(null, '', "/#contact");
+                }
+              }
+            }}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="bg-slate-900 text-white px-10 py-3.5 rounded-full text-[12px] font-black uppercase tracking-widest hover:bg-primary-orange transition-all duration-500"
+            className="bg-slate-900 text-white px-5 xl:px-6 py-2 rounded-full text-[10px] font-black uppercase tracking-wider hover:bg-primary-orange transition-all duration-500"
           >
             Connect
           </motion.a>
           
           <button 
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="lg:hidden p-3 bg-slate-100 rounded-full text-slate-600"
+            className="lg:hidden p-2 bg-slate-100 rounded-full text-slate-600"
           >
-            {isMenuOpen ? <X size={20} /> : <Menu size={20} />}
+            {isMenuOpen ? <X size={16} /> : <Menu size={16} />}
           </button>
         </div>
       </div>
@@ -221,7 +252,20 @@ const Navbar: React.FC<NavbarProps> = ({ isMenuOpen, setIsMenuOpen }) => {
                 <RouterLink 
                   key={item.path + item.name} 
                   to={item.path} 
-                  onClick={() => setIsMenuOpen(false)} 
+                  onClick={(e) => {
+                    setIsMenuOpen(false);
+                    if (item.path === "/" && window.location.pathname === "/") {
+                      window.scrollTo({ top: 0, behavior: 'smooth' });
+                    } else if (item.path.startsWith("/#") && window.location.pathname === "/") {
+                      const id = item.path.replace('/#', '');
+                      const element = document.getElementById(id);
+                      if (element) {
+                        e.preventDefault();
+                        element.scrollIntoView({ behavior: 'smooth' });
+                        window.history.pushState(null, '', item.path);
+                      }
+                    }
+                  }} 
                   className="p-5 bg-slate-50 border border-slate-100 rounded-3xl text-center text-[12px] font-black uppercase text-[#6A0DAD] active:bg-[#6A0DAD] active:text-white transition-all shadow-sm"
                 >
                   {item.name}
@@ -230,7 +274,17 @@ const Navbar: React.FC<NavbarProps> = ({ isMenuOpen, setIsMenuOpen }) => {
             </div>
             <RouterLink 
               to="/#contact" 
-              onClick={() => setIsMenuOpen(false)} 
+              onClick={(e) => {
+                setIsMenuOpen(false);
+                if (window.location.pathname === "/") {
+                  const element = document.getElementById("contact");
+                  if (element) {
+                    e.preventDefault();
+                    element.scrollIntoView({ behavior: 'smooth' });
+                    window.history.pushState(null, '', "/#contact");
+                  }
+                }
+              }} 
               className="block w-full p-5 bg-gradient-to-r from-[#6A0DAD] via-[#FF4500] to-[#228B22] text-white rounded-3xl text-center font-black uppercase text-[14px] shadow-xl shadow-orange-100"
             >
               Get In Touch

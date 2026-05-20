@@ -22,3 +22,9 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# ভারী এবং পার্সোনাল ফাইল বাদ দেওয়ার জন্য
+public/C0001.MP4
+public/Git-2.54.0-64-bit.exe
+public/MD SIR Incame Tax.jpeg
+.env

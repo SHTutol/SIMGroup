@@ -1143,7 +1143,7 @@ const HomePage = ({
                      <div className="w-10 h-10 bg-white/5 rounded-xl flex items-center justify-center shrink-0 border border-white/10">
                        <Factory className="text-indigo-500" size={18} />
                      </div>
-                     <p className="text-slate-400 text-sm leading-relaxed italic">Dari-Gawsia, Rupganj, Narayanganj. Bangladesh.</p>
+                     <p className="text-slate-400 text-sm leading-relaxed italic">Thakurbari Teac, Masumabad, Bhulta, Rupganj , Narayanganj, Bangladesh.</p>
                    </div>
                  </div>
                </div>

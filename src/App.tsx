@@ -788,7 +788,7 @@ const HomePage = ({
               { n: "Mrs. Rahima Mozaffar", r: "Chairman", img: "/Charman.png" },
               { n: "Engr. Md. Mozaffar Hossain, MP", r: "Managing Director", img: "/MD.png" },
               { n: "A.S.M. Rakibul Hasan", r: "Deputy Managing Director", img: "/DMD.png" },
-              { n: "A.S.M. Raisul Hasan", r: "Director", img: "/Director.png" }
+              { n: "A.S.M. Raisul Hasan", r: "Director", img: "/Director PP.jpeg" }
             ].map((l, i) => (
               <motion.div key={i} whileHover={{ y: -20 }} transition={{ type: "spring", stiffness: 400, damping: 20 }} className="bg-white p-10 rounded-[3.5rem] shadow-xl border border-slate-100 group hover:shadow-2xl hover:shadow-blue-500/10 transition-all duration-500">
                 <div className="w-48 h-58 mx-auto mb-10 relative">

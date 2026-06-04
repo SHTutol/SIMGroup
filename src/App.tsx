@@ -30,6 +30,7 @@ import ProductsPage from './ProductsPage';
 import GalleryPhotosPage from './GalleryPhotosPage';
 import GalleryVideosPage from './GalleryVideosPage';
 import Navbar from './components/Navbar';
+import CareerPage from './CareerPage';
 
 // --- স্ক্রল টপ সলিউশন ---
 const ScrollToTop = () => {
@@ -58,7 +59,7 @@ const HashLinkObserver = () => {
   }, [hash, pathname]);
   return null;
 };
-
+//
 // --- Custom Cursor Component ---
 const CustomCursor = () => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
@@ -99,7 +100,7 @@ const CustomCursor = () => {
     />
   );
 };
-
+//
 // --- সংখ্যা গণনার জন্য কাউন্টার কম্পোনেন্ট ---
 const StatCounter = ({ value, label }: { value: string, label: string }) => {
   const ref = useRef(null);
@@ -147,7 +148,6 @@ const HomePage = ({
 }: any) => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const heroImages = [
-    "/company.jpg",
     "MD SIR Incame Tax.jpeg",
     "team-photo.jpg",
     "3 Man.jpeg",
@@ -788,7 +788,7 @@ const HomePage = ({
               { n: "Mrs. Rahima Mozaffar", r: "Chairman", img: "/Charman.png" },
               { n: "Engr. Md. Mozaffar Hossain, MP", r: "Managing Director", img: "/MD.png" },
               { n: "A.S.M. Rakibul Hasan", r: "Deputy Managing Director", img: "/DMD.png" },
-              { n: "A.S.M. Raisul Hasan", r: "Director", img: "/Director PP.jpeg" }
+              { n: "A.S.M. Raisul Hasan", r: "Director", img: "/Director.png" }
             ].map((l, i) => (
               <motion.div key={i} whileHover={{ y: -20 }} transition={{ type: "spring", stiffness: 400, damping: 20 }} className="bg-white p-10 rounded-[3.5rem] shadow-xl border border-slate-100 group hover:shadow-2xl hover:shadow-blue-500/10 transition-all duration-500">
                 <div className="w-48 h-58 mx-auto mb-10 relative">
@@ -1143,7 +1143,7 @@ const HomePage = ({
                      <div className="w-10 h-10 bg-white/5 rounded-xl flex items-center justify-center shrink-0 border border-white/10">
                        <Factory className="text-indigo-500" size={18} />
                      </div>
-                     <p className="text-slate-400 text-sm leading-relaxed italic">Thakurbari Teac, Masumabad, Bhulta, Rupganj , Narayanganj, Bangladesh.</p>
+                     <p className="text-slate-400 text-sm leading-relaxed italic">Thakurbari Teac, Masumabad, Bhulta, Rupgonj, Narayangonj, Dhaka, Bangladesh.</p>
                    </div>
                  </div>
                </div>
@@ -1243,6 +1243,7 @@ function App() {
         <Route path="/certifications" element={<CertificationsPage />} />
         <Route path="/gallery/photos" element={<GalleryPhotosPage />} />
         <Route path="/gallery/videos" element={<GalleryVideosPage />} />
+        <Route path="/career" element={<CareerPage />} />
       </Routes>
     </Router>
   );

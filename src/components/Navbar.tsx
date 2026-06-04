@@ -102,7 +102,8 @@ const Navbar: React.FC<NavbarProps> = ({ isMenuOpen, setIsMenuOpen }) => {
                 { name: "Sustainable Chemicals", slug: "/#product-chemicals" },
                 { name: "Agro Products", slug: "/#product-agro" }
               ]
-            }
+            },
+            { name: "Career", slug: "/career" }
           ].map((item) => (
             <div 
               key={item.name} 
@@ -247,7 +248,8 @@ const Navbar: React.FC<NavbarProps> = ({ isMenuOpen, setIsMenuOpen }) => {
                 { name: "Sustainability", path: "/sustainability" },
                 { name: "Certifications", path: "/certifications" },
                 { name: "gallery photos", path: "/gallery/photos" },
-                { name: "gallery videos", path: "/gallery/videos" }
+                { name: "gallery videos", path: "/gallery/videos" },
+                { name: "career", path: "/career" }
               ].map((item) => (
                 <RouterLink 
                   key={item.path + item.name} 
